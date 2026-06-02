@@ -1,0 +1,21 @@
+# Gradle
+.gradle/
+build/
+*.apk
+*.aab
+
+# Android Studio
+.idea/
+*.iml
+*.iws
+*.ipr
+out/
+
+# macOS
+.DS_Store
+
+# Local properties
+local.properties
+
+# Generated files
+gen/
