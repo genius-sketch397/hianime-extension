@@ -1,0 +1,45 @@
+plugins {
+    id 'com.android.application'
+    id 'kotlin-android'
+}
+
+android {
+    compileSdk 33
+    
+    defaultConfig {
+        applicationId "eu.kanade.tachiyomi.animeextension.english.hianime"
+        minSdk 21
+        targetSdk 33
+        versionCode 1
+        versionName "1.0.0"
+    }
+    
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+    
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_11
+        targetCompatibility JavaVersion.VERSION_11
+    }
+    
+    kotlinOptions {
+        jvmTarget = '11'
+    }
+    
+    namespace "eu.kanade.tachiyomi.animeextension.english.hianime"
+}
+
+dependencies {
+    implementation 'org.jetbrains.kotlin:kotlin-stdlib-jdk8:1.8.20'
+    implementation 'androidx.appcompat:appcompat:1.6.1'
+    implementation 'org.jsoup:jsoup:1.15.3'
+    implementation 'com.squareup.okhttp3:okhttp:4.10.0'
+    implementation 'com.google.code.gson:gson:2.10.1'
+    
+    // Tachiyomi/Aniyomi API
+    compileOnly 'com.github.tachiyomiorg:tachiyomi-api:v1.4.5'
+}
