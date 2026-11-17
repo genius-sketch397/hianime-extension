@@ -1,69 +1,34 @@
-# HiAnime & AnimePahe Extensions for Aniyomi
+# HiAnime & AnimePahe extensions for Aniyomi
 
-Custom Aniyomi extensions for HiAnime and AnimePahe sources. These extensions allow you to stream anime from these sources directly through Aniyomi.
+This repository contains Android extension modules for Aniyomi. It is **not** a Cloudstream repository: the output is installable Aniyomi APKs, not `.cs3` plugins.
 
-## Features
+## Sources
 
-- **HiAnime Extension** - Stream anime from hianime.ms
-- **AnimePahe Extension** - Stream anime from animepahe.pw
-- Easy domain updates when sources change
-- Regular maintenance and updates
+| Extension | Website | Status |
+| --- | --- | --- |
+| HiAnime | https://hianime.ms | Under development; the domain is intentionally kept on `hianime.ms`. |
+| AnimePahe | https://animepahe.pw | Module scaffold only; provider implementation is pending. |
 
-## Installation
+## Build
 
-1. Download the latest APK from releases
-2. Install on your device
-3. Open Aniyomi and enable the extensions in Settings > Extensions
+The project currently uses Android Gradle Plugin 7.4.2 and Java 11. GitHub Actions builds both release modules on pushes, pull requests, and manual runs.
 
-## Building from Source
-
-### Prerequisites
-- Android Studio
-- JDK 11 or higher
-- Gradle 7.0+
-
-### Build Instructions
+To build locally, install JDK 11 and Gradle 7.6.4, then run:
 
 ```bash
-git clone https://github.com/genius-sketch397/hianime-extension.git
-cd hianime-extension
-./gradlew assembleDebug
+gradle --no-daemon assembleRelease
 ```
 
-The APK will be generated in `build/outputs/apk/debug/`
+The APKs are generated under each module's `build/outputs/apk/release/` directory. CI uploads them as a workflow artifact.
 
-## Project Structure
+## Install
 
-```
-hianime-extension/
-├── hianime/
-│   ├── src/main/kotlin/eu/kanade/tachiyomi/animeextension/english/hianime/
-│   ├── build.gradle
-│   └── AndroidManifest.xml
-├── animepahe/
-│   ├── src/main/kotlin/eu/kanade/tachiyomi/animeextension/english/animepahe/
-│   ├── build.gradle
-│   └── AndroidManifest.xml
-├── build.gradle
-├── settings.gradle
-└── README.md
-```
+For a local test, install the generated APK on the Android device where Aniyomi is installed. The extension package must be compatible with the Aniyomi version in use. A successful Gradle build alone does not mean the source's website parsing or video playback has been verified.
 
-## Updating Domains
+## Repository status
 
-When domain changes occur:
-1. Update the base URL in the respective extension class
-2. Rebuild the extension
-3. Release a new version
-
-### Current URLs
-- **HiAnime**: https://hianime.ms
-- **AnimePahe**: https://animepahe.pw
-
-## Support
-
-For issues or feature requests, please create an issue on this repository.
+The project is being brought up to a reproducible build first. The HiAnime source still needs its current `hianime.ms` page, episode, server, and stream flows implemented and tested. The AnimePahe module does not yet contain a source class. No public extension index or signed release is published yet.
 
 ## Disclaimer
 
-This project is for educational purposes only. Use at your own risk.
+This project is independent and is not affiliated with Aniyomi or the websites it connects to. Use only content you are authorized to access.
