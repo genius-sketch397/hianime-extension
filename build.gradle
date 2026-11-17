@@ -3,20 +3,15 @@ plugins {
     id 'org.jetbrains.kotlin.android' version '1.8.20' apply false
 }
 
-allprojects {
-    repositories {
-        google()
-        mavenCentral()
-        maven { url "https://jitpack.io" }
-    }
-}
-
+// Repositories are declared centrally in settings.gradle.
+// Do not add project-level repositories here: settings.gradle uses
+// RepositoriesMode.FAIL_ON_PROJECT_REPOS.
 subprojects {
     afterEvaluate {
         if (project.hasProperty('android')) {
             android {
                 compileSdk 33
-                
+
                 defaultConfig {
                     minSdk 21
                     targetSdk 33
