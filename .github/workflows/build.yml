@@ -1,0 +1,42 @@
+name: Build Aniyomi extensions
+
+on:
+  push:
+    branches: [main, "work/**"]
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Set up JDK 11
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: "11"
+
+      - name: Set up Gradle
+        uses: gradle/actions/setup-gradle@v4
+        with:
+          gradle-version: "7.6.4"
+
+      - name: Build extension APKs
+        run: gradle --no-daemon assembleRelease
+
+      - name: Upload APKs
+        uses: actions/upload-artifact@v4
+        with:
+          name: aniyomi-extension-apks
+          path: |
+            hianime/build/outputs/apk/release/*.apk
+            animepahe/build/outputs/apk/release/*.apk
+          if-no-files-found: error
+          retention-days: 14
